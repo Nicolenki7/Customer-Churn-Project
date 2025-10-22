@@ -21,7 +21,7 @@ Los hallazgos del modelo predictivo (LogReg) revelan los factores críticos de r
 | Recurso | Descripción | Enlace |
 | :--- | :--- | :--- |
 | **Dashboard Interactivo (Tableau)** | Visualización ejecutiva y conclusiones accionables. | **[https://lnkd.in/dx4Pp-j5]** |
-| **Análisis y Código (Colab/Python)** | Limpieza de datos (SQL) y Modelado Predictivo (Importancia de Features). | **[]** |
+| **Análisis y Código (Colab/Python)** | Limpieza de datos (SQL) y Modelado Predictivo (Importancia de Features). | **[https://colab.research.google.com/github/Nicolenki7/Customer-Churn-Project/blob/main/Customer_Churn_Python%2BSQlite.ipynb]** |
 
 ---
 
