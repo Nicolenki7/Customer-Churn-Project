@@ -9,6 +9,12 @@
 
 ---
 
+## 📊 Interactive report
+
+**[Open the interactive report →](https://nicolenki7.github.io/Customer-Churn-Project/report.html)** — filters, charts and the table behind them, rebuilt from the committed CSVs.
+
+---
+
 ## The business question
 
 A telecom operator is losing **one customer in four**. Winning a new one costs five to seven times more than keeping the one already paying, so the question that matters is not *how many* people leave but **who is going to leave, when, and why** — and which of those levers is actually within reach.
