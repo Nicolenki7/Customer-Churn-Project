@@ -1,29 +1,76 @@
-<!doctype html>
-<html lang="es"><head><meta charset="utf-8">
+<!doctype html><html lang="es"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Customer-Churn-Project - Informe de datos</title>
-<style>*{box-sizing:border-box}body{margin:0;background:#0b0f14;color:#e6edf3;font:15px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}.wrap{max-width:900px;margin:0 auto;padding:46px 20px 70px}.eyebrow{margin:0 0 10px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#38e07b}h1{margin:0 0 8px;font-size:clamp(26px,5vw,38px);line-height:1.1;letter-spacing:-.02em}.sub{margin:0;color:#8b9bab;font-size:14px}.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:26px 0}.kpi{background:#121820;border:1px solid #1f2a36;border-radius:14px;padding:16px}.kpi .v{font-size:24px;font-weight:700;color:#38e07b;font-variant-numeric:tabular-nums}.kpi .l{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#8b9bab;margin-top:4px}.card{background:#121820;border:1px solid #1f2a36;border-radius:16px;padding:22px;margin-bottom:18px}.card h2{margin:0 0 16px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#8b9bab}code{background:#1a2531;padding:1px 6px;border-radius:6px;font-size:12px}footer{margin-top:38px;padding-top:18px;border-top:1px solid #1f2a36;font-size:12px;color:#68798a}</style></head>
-<body><main class="wrap">
-<p class="eyebrow">Informe generado desde el dataset del repositorio</p>
-<h1>Customer-Churn-Project</h1>
-<p class="sub">Fuente: <code>telco_churn_feature_engineered_for_tableau.csv</code> - separador coma - agregacion: media</p>
-<div class="kpis">
-<div class="kpi"><div class="v">7,043</div><div class="l">filas</div></div>
-<div class="kpi"><div class="v">22</div><div class="l">columnas</div></div>
-<div class="kpi"><div class="v">100.0%</div><div class="l">celdas con dato</div></div>
-<div class="kpi"><div class="v">9</div><div class="l">columnas numericas</div></div>
-</div>
-<section class="card"><h2>Distribucion de registros por Contract</h2>
-<svg viewBox="0 0 820 94" width="100%">
-<rect x="250" y="8" width="480" height="16" rx="4" fill="#38e07b"/><text x="240" y="20" text-anchor="end" font-size="12" fill="#a9b8c7">Month-to-month</text><text x="738" y="20" font-size="12" fill="#e6edf3">3,875</text>
-<rect x="250" y="34" width="210" height="16" rx="4" fill="#38e07b"/><text x="240" y="46" text-anchor="end" font-size="12" fill="#a9b8c7">Two year</text><text x="468" y="46" font-size="12" fill="#e6edf3">1,695</text>
-<rect x="250" y="60" width="182" height="16" rx="4" fill="#38e07b"/><text x="240" y="72" text-anchor="end" font-size="12" fill="#a9b8c7">One year</text><text x="441" y="72" font-size="12" fill="#e6edf3">1,473</text>
-</svg></section>
-<section class="card"><h2>Promedio de TotalCharges por Contract</h2>
-<svg viewBox="0 0 820 94" width="100%">
-<rect x="250" y="8" width="480" height="16" rx="4" fill="#4cc2ff"/><text x="240" y="20" text-anchor="end" font-size="12" fill="#a9b8c7">Two year</text><text x="738" y="20" font-size="12" fill="#e6edf3">3,707</text>
-<rect x="250" y="34" width="177" height="16" rx="4" fill="#4cc2ff"/><text x="240" y="46" text-anchor="end" font-size="12" fill="#a9b8c7">Month-to-month</text><text x="435" y="46" font-size="12" fill="#e6edf3">1,369</text>
-<rect x="250" y="60" width="393" height="16" rx="4" fill="#4cc2ff"/><text x="240" y="72" text-anchor="end" font-size="12" fill="#a9b8c7">One year</text><text x="651" y="72" font-size="12" fill="#e6edf3">3,033</text>
-</svg></section>
-<footer>Cada cifra se calcula del CSV versionado en este repositorio; no hay datos simulados.</footer>
-</main></body></html>
+<title>Churn: quién se va y cuánto cuesta que se vaya</title><style>:root{--t:#1f2328;--g:#57606a;--l:#d0d7de;--a:#0f62fe;--r:#da1e28;--f:#f6f8fa}
+*{box-sizing:border-box}
+body{margin:0;color:var(--t);font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif}
+.w{max-width:1000px;margin:0 auto;padding:40px 24px 64px}
+header{border-bottom:1px solid var(--l);padding-bottom:24px}
+.eb{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--a);font-weight:700}
+h1{font-size:30px;line-height:1.25;margin:10px 0 12px;letter-spacing:-.02em}
+h2{font-size:19px;margin:0 0 4px}
+.pq{color:var(--g);font-size:16px;max-width:70ch;margin:0}
+.k{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:28px 0 8px}
+.k div{background:var(--f);border:1px solid var(--l);border-radius:10px;padding:14px 16px}
+.k b{display:block;font-size:24px;letter-spacing:-.02em}
+.k span{font-size:12px;color:var(--g);text-transform:uppercase;letter-spacing:.06em}
+.k em{display:block;font-size:12px;color:var(--g);font-style:normal}
+.fl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:28px 0 4px}
+.fl i{font-size:12px;color:var(--g);text-transform:uppercase;letter-spacing:.06em;font-style:normal;margin-right:4px}
+button{font:inherit;font-size:13px;padding:6px 14px;border-radius:999px;border:1px solid var(--l);background:#fff;color:var(--g);cursor:pointer;transition:.15s}
+button:hover{border-color:var(--a);color:var(--a)}
+button[aria-pressed=true]{background:var(--a);border-color:var(--a);color:#fff}
+section{margin:36px 0}
+.s{color:var(--g);font-size:13px;margin:0 0 18px}
+.b{display:grid;gap:9px}
+.f{display:grid;grid-template-columns:132px 1fr 92px;gap:12px;align-items:center}
+.f u{font-size:13px;color:var(--g);text-align:right;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p{background:var(--f);border-radius:4px;height:22px;overflow:hidden}
+.p div{height:100%;background:var(--a);border-radius:4px;transition:width .35s}
+.p .neg{background:var(--r)}
+.f s{font-size:13px;font-variant-numeric:tabular-nums;font-weight:600;text-align:right;text-decoration:none}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--l)}
+th{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--g)}
+td.n{text-align:right;font-variant-numeric:tabular-nums}
+ul,ol{color:var(--g);font-size:13.5px;padding-left:20px}
+li{margin:6px 0}
+footer{border-top:1px solid var(--l);margin-top:44px;padding-top:16px;font-size:12px;color:var(--g)}
+code{background:var(--f);padding:2px 5px;border-radius:4px;font-size:12.5px}</style></head><body><div class="w">
+<header><p class="eb">Retención · Telco churn</p><h1>Churn: quién se va y cuánto cuesta que se vaya</h1><p class="pq">Una operadora pierde clientes todos los meses y no todos se van por el mismo motivo. La pregunta útil no es cuánta gente se va, sino qué contratos y qué tramos de antigüedad concentran las bajas, porque ahí es donde se puede intervenir.</p></header>
+<div class="k"><div><span>Clientes</span><b>7.043</b><em>una fila por cliente</em></div><div><span>Bajas</span><b>26,5 %</b><em>tasa global</em></div><div><span>Cuota media</span><b>64,76 $</b><em>por mes</em></div><div><span>Antigüedad media</span><b>32 m</b><em>meses como cliente</em></div></div><section><h2>Tasa de baja por tipo de contrato</h2><p class='s'>% de clientes que se van, en cada grupo</p><div class='b' id='g-c'></div></section>
+<section><h2>Tasa de baja por antigüedad</h2><p class='s'>el primer año es el que decide la relación</p><div class='b' id='g-t'></div></section>
+<section><h2>Tasa de baja por método de pago</h2><p class='s'>el domiciliado retiene; el manual no</p><div class='b' id='g-p'></div></section>
+<section><h2>Cuota mensual media por contrato</h2><p class='s'>lo que paga de media cada grupo</p><div class='b' id='g-m'></div></section>
+<section><h2>El detalle por método de pago</h2><p class='s'>ordenado de más a menos bajas</p><table><thead><tr><th>Método</th><th>Clientes</th><th>Bajas</th><th>Cuota media</th><th>Antigüedad (m)</th></tr></thead><tbody><tr><td>Electronic check</td><td class='n'>2.365</td><td class='n'>45,3 %</td><td class='n'>76,26 $</td><td class='n'>25</td></tr><tr><td>Mailed check</td><td class='n'>1.612</td><td class='n'>19,1 %</td><td class='n'>43,92 $</td><td class='n'>22</td></tr><tr><td>Bank transfer (automatic)</td><td class='n'>1.544</td><td class='n'>16,7 %</td><td class='n'>67,19 $</td><td class='n'>44</td></tr><tr><td>Credit card (automatic)</td><td class='n'>1.522</td><td class='n'>15,2 %</td><td class='n'>66,51 $</td><td class='n'>43</td></tr></tbody></table></section>
+<section><h2>Cómo se calcula</h2><p class="s">Una fila por cliente; cada corte agrupa por una sola dimensión.</p><ol><li>Cada fila es un cliente; la tasa es la media de Churn convertida a 0/1.</li><li>Los tramos de antigüedad se cortan en 12, 24 y 48 meses, que son los saltos de contrato del dataset.</li><li>No se cruzan dos dimensiones a la vez: cada gráfico responde una pregunta distinta.</li><li>La cuota es MonthlyCharges, no el gasto histórico total.</li></ol></section>
+<section><h2>Qué no dice este informe</h2><p class="s">Lo que este dataset no permite afirmar.</p><ul><li>El CSV no trae fecha de baja ni motivo: no se puede saber cuándo se fue ni por qué.</li><li>Sin coste de adquisición no se puede calcular el valor de vida del cliente.</li><li>Es una foto de una operadora ficticia congelada en el tiempo, no una serie mensual.</li><li>Los grupos pequeños (dos meses de contrato) tienen tasas inestables.</li></ul></section>
+<footer>Generado por <code>src/report.py</code> a partir de <code>telco_churn.csv</code>. Sin dependencias,
+sin CDN: cada cifra de esta página sale de los datos del repositorio.</footer>
+</div><script>const DATOS={"filas":[
+{"a":"todos","g":"contrato","k":"Month-to-month","v":42.7,"u":"%"},
+{"a":"todos","g":"contrato","k":"One year","v":11.3,"u":"%"},
+{"a":"todos","g":"contrato","k":"Two year","v":2.8,"u":"%"},
+{"a":"todos","g":"tramo","k":"0-12 m","v":47.4,"u":"%"},
+{"a":"todos","g":"tramo","k":"13-24 m","v":28.7,"u":"%"},
+{"a":"todos","g":"tramo","k":"25-48 m","v":20.4,"u":"%"},
+{"a":"todos","g":"tramo","k":"más de 48","v":9.5,"u":"%"},
+{"a":"todos","g":"pago","k":"Bank transfer (automatic)","v":16.7,"u":"%"},
+{"a":"todos","g":"pago","k":"Credit card (automatic)","v":15.2,"u":"%"},
+{"a":"todos","g":"pago","k":"Electronic check","v":45.3,"u":"%"},
+{"a":"todos","g":"pago","k":"Mailed check","v":19.1,"u":"%"},
+{"a":"todos","g":"cuota","k":"Month-to-month","v":66.4,"u":"$"},
+{"a":"todos","g":"cuota","k":"One year","v":65.05,"u":"$"},
+{"a":"todos","g":"cuota","k":"Two year","v":60.77,"u":"$"}
+],"graficos":[{"id":"c","grupo":"contrato","titulo":"Tasa de baja por tipo de contrato","subtitulo":"% de clientes que se van, en cada grupo","unidad":"%"},{"id":"t","grupo":"tramo","titulo":"Tasa de baja por antigüedad","subtitulo":"el primer año es el que decide la relación","unidad":"%"},{"id":"p","grupo":"pago","titulo":"Tasa de baja por método de pago","subtitulo":"el domiciliado retiene; el manual no","unidad":"%"},{"id":"m","grupo":"cuota","titulo":"Cuota mensual media por contrato","subtitulo":"lo que paga de media cada grupo","unidad":"$"}]};const D=DATOS;let act='todos';
+const num=(v,u)=>{const n=Math.abs(v).toLocaleString('es-ES',{maximumFractionDigits:u==='%'?1:0});return (v<0?'-':'')+n+(u==='%'?' %':'')};
+function pinta(){D.graficos.forEach(g=>{const c=document.getElementById('g-'+g.id);
+const fs=D.filas.filter(f=>f.g===g.grupo&&(act==='todos'||f.a===act));
+if(!fs.length){c.innerHTML='<p class="s">Sin datos para este filtro.</p>';return}
+const o={};fs.forEach(f=>{o[f.k]=(o[f.k]||0)+f.v});
+const ks=(g.orden||Object.keys(o)).filter(k=>k in o),vs=ks.map(k=>o[k]);
+const max=Math.max(...vs.map(Math.abs),1),u=g.unidad||fs[0].u||'';
+c.innerHTML=ks.map((k,i)=>{const v=vs[i];
+return '<div class="f"><u>'+k+'</u><div class="p"><div class="'+(v<0?'neg':'')+'" style="width:'+Math.max(Math.abs(v)/max*100,.6)+'%"></div></div><s>'+num(v,u)+'</s></div>'}).join('')})}
+document.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{act=b.dataset.v;
+document.querySelectorAll('button').forEach(o=>o.setAttribute('aria-pressed',o===b));pinta()}));
+pinta();</script></body></html>
