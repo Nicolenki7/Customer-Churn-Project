@@ -57,7 +57,7 @@ jobs:
                   'from sklearn.metrics import roc_auc_score',
                   "print(f'RESPUESTA: la baja global es {tasa:.1%} ({bajas} de {len(df)} clientes).')",
                   "print(f'RESPUESTA: el contrato mensual tiene {por_contrato.loc[\"Month-to-month\", \"mean\"]:.1%} de baja frente a {por_contrato.loc[\"Two year\", \"mean\"]:.1%} del bienal.')",
-                  "print(f'RESPUESTA: el primer anio concentra {antig.loc[\"0-1 anio\", \"mean\"]:.1%} de baja; el modelo logra AUC {roc_auc_score(y_te, prob):.3f}.')",
+                  "print(f'RESPUESTA: el primer año concentra {antig.loc[\"0-1 año\", \"mean\"]:.1%} de baja; el modelo logra AUC {roc_auc_score(y_te, prob):.3f}.')",
               ]
               nb.cells.append(new_markdown_cell('## Respuestas en una linea\n\nLas tres preguntas del inicio, con el numero al lado.'))
               nb.cells.append(new_code_cell('\n'.join(lineas)))
