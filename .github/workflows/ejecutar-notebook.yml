@@ -19,6 +19,32 @@ jobs:
           python-version: '3.12'
       - name: Dependencias
         run: pip install --quiet nbconvert ipykernel pandas matplotlib scikit-learn
+      - name: Cabecera para el reclutador
+        run: |
+          python - <<'PY'
+          import nbformat
+          from nbformat.v4 import new_markdown_cell
+
+          RUTA = 'Customer_Churn_Python+SQlite.ipynb'
+          TEXTO = '''[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Nicolenki7/Customer-Churn-Project/blob/main/Customer_Churn_Python%2BSQlite.ipynb)
+
+> **En 30 segundos:** 26,5 % de baja, y el contrato mensual es la palanca: 42,7 % frente a 11,3 % en anual.
+>
+> - 1.869 de 7.043 clientes se dieron de baja
+> - Primer año: 47,4 % de churn; pasados cinco años: 6,6 %
+> - Modelo logístico interpretable con AUC 0,846
+>
+> Los resultados ya están ejecutados: no hace falta correr nada para leerlos.'''
+
+          nb = nbformat.read(RUTA, as_version=4)
+          primero = ''.join(nb.cells[0].source) if nb.cells else ''
+          if 'En 30 segundos' not in primero:
+              nb.cells.insert(0, new_markdown_cell(TEXTO))
+              nbformat.write(nb, RUTA)
+              print('cabecera insertada')
+          else:
+              print('cabecera ya presente')
+          PY
       - name: Ejecutar
         run: jupyter nbconvert --to notebook --execute --inplace "Customer_Churn_Python+SQlite.ipynb" --ExecutePreprocessor.timeout=900
       - name: Commit
